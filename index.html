@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>XSS</title>
+    <link rel="stylesheet" href="/assets/styles.css" />
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="title">
+        <h1>{{title1}}</h1>
+        <h2>{{title2}}</h2>
+        <svg
+          class="logo"
+          viewBox="0 0 128 128"
+          width="24"
+          height="24"
+          data-v-5f26462c=""
+        >
+          <path
+            fill="#42b883"
+            d="M78.8,10L64,35.4L49.2,10H0l64,110l64-110C128,10,78.8,10,78.8,10z"
+            data-v-5f26462c=""
+          ></path>
+          <path
+            fill="#35495e"
+            d="M78.8,10L64,35.4L49.2,10H25.6L64,76l38.4-66H78.8z"
+            data-v-5f26462c=""
+          ></path>
+        </svg>
+      </div>
+      <form method="get" class="message-form" @submit.prevent="onSubmit">
+        <label for="message">Message</label>
+        <input id="message" v-model="message" />
+        <label for="image">Image</label>
+        <input id="image" v-model="image" />
+        <input class="button" type="submit" value="Send Message" />
+      </form>
+      <!-- <div class="xss" v-html="attack3"></div> -->
+      <!-- <div class="xss" v-html="attack2"></div> -->
+      <!-- <div class="hack" v-html="hack"></div> -->
+      <!-- <h3 v-text="text"></h3> -->
+      <div class="post-container">
+        <ul>
+          <li v-for="post in posts" class="message-item">
+            <div class="message-image">
+              <img :src="post.image" alt="" />
+            </div>
+            <p v-html="post.message"></p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <script src="/main.js"></script>
+  </body>
+</html>
